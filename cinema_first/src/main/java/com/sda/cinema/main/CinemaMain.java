@@ -13,10 +13,10 @@ public class CinemaMain {
         Connection conn = DatabaseConnection.getConnection();
 //            getMovies(conn);
 //            getMovieByTitle(titleToSearch, conn);
-//        UseCases.showMovies(conn);
-        UseCases.showRepertoireByDate(conn, "2018-09-15");
+        UseCases.showMovies(conn);
+//        UseCases.showRepertoireByDate(conn, "2018-09-15");
 
-        UseCases.showRepertoireByDate(conn, "2018-09-20");
+//        UseCases.showRepertoireByDate(conn, "2018-09-20");
         DatabaseConnection.closeOnExit(conn);
     }
 

@@ -20,6 +20,7 @@ public class AdminQuery {
     private static final String GET_GENRES = "SELECT * FROM genres;";
     private static final String GET_AGE_CATEGORIES = "SELECT * FROM age_categories;";
     private static final String GET_SCREENINGS_BY_DATE = "SELECT * FROM screenings WHERE screening_date = ?";
+    private static final String GET_SCREENINGS_BY_MOVIE_ID = "SELECT * FROM screenings WHERE id_movie = ?";
 
     private static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
 
@@ -83,6 +84,7 @@ public class AdminQuery {
                     Genre genre = genres.stream().filter(g -> g.getId() == idGenre).findFirst().get();
                     movie.setGenre(genre);
                 }
+                movie.setScreenings(getScreeningsByMovie(connection, movie));
                 results.add(movie);
             }
             return results;
@@ -91,6 +93,34 @@ public class AdminQuery {
             return Collections.emptyList();
         }
 
+    }
+
+    private static List<Screening> getScreeningsByMovie(Connection connection, Movie movie){
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_SCREENINGS_BY_MOVIE_ID);
+            preparedStatement.setInt(1, movie.getId());
+            preparedStatement.execute();
+            ResultSet rs = preparedStatement.getResultSet();
+            List<Screening> results = new ArrayList<>();
+            while (rs.next()) {
+                Screening screening = new Screening();
+                screening.setId(rs.getInt("id"));
+                String screeningDate = rs.getString("screening_date");
+                if (screeningDate != null){
+                    screening.setScreeningDate(LocalDate.parse(screeningDate));
+                }
+                String screeningTime = rs.getString("screening_time");
+                if (screeningTime != null){
+                    screening.setScreeningTime(LocalTime.parse(screeningTime));
+                }
+                screening.setMovie(movie);
+                results.add(screening);
+            }
+            return results;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     private static List<Genre> getGenres(Connection connection) {

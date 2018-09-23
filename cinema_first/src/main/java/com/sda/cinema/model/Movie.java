@@ -107,4 +107,8 @@ public class Movie {
     public List<Screening> getScreenings() {
         return screenings;
     }
+
+    public void setScreenings(List<Screening> screenings) {
+        this.screenings = screenings;
+    }
 }

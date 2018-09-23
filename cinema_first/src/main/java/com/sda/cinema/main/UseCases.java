@@ -15,6 +15,7 @@ public class UseCases {
             System.out.println("FILM: "+movie.getTitle());
             System.out.println("REŻYSER: "+movie.getDirector());
             System.out.println("OBSADA: "+movie.getActors());
+            System.out.println("ILOSC SEANSÓW: "+movie.getScreenings().size());
             System.out.println("--------------------");
         }
     }

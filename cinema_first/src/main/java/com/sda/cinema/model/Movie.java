@@ -2,6 +2,8 @@ package com.sda.cinema.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.BitSet;
+import java.util.List;
 
 public class Movie {
     private int id;
@@ -13,6 +15,7 @@ public class Movie {
     private String description;
     private AgeCategory ageCategory;
     private Genre genre;
+    private List<Screening> screenings;
 
     @Override
     public String toString() {
@@ -99,5 +102,9 @@ public class Movie {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    public List<Screening> getScreenings() {
+        return screenings;
     }
 }

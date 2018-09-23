@@ -24,3 +24,4 @@ hs_err_pid*
 
 /cinema_first/.idea
 *.iml
+/cinema_first/target/*

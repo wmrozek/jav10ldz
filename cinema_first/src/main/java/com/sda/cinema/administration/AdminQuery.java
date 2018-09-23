@@ -33,15 +33,15 @@ public class AdminQuery {
             preparedStatement.execute();
             ResultSet rs = preparedStatement.getResultSet();
             List<Screening> results = new ArrayList<>();
-            while(rs.next()){
+            while (rs.next()) {
                 Screening screening = new Screening();
                 screening.setId(rs.getInt("id"));
                 String screeningDate = rs.getString("screening_date");
-                if (screeningDate != null){
+                if (screeningDate != null) {
                     screening.setScreeningDate(LocalDate.parse(screeningDate));
                 }
                 String screeningTime = rs.getString("screening_time");
-                if (screeningTime != null){
+                if (screeningTime != null) {
                     screening.setScreeningTime(LocalTime.parse(screeningTime));
                 }
                 Integer idMovie = rs.getInt("id_movie");
@@ -95,7 +95,7 @@ public class AdminQuery {
 
     }
 
-    private static List<Screening> getScreeningsByMovie(Connection connection, Movie movie){
+    private static List<Screening> getScreeningsByMovie(Connection connection, Movie movie) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(GET_SCREENINGS_BY_MOVIE_ID);
             preparedStatement.setInt(1, movie.getId());
@@ -106,11 +106,11 @@ public class AdminQuery {
                 Screening screening = new Screening();
                 screening.setId(rs.getInt("id"));
                 String screeningDate = rs.getString("screening_date");
-                if (screeningDate != null){
+                if (screeningDate != null) {
                     screening.setScreeningDate(LocalDate.parse(screeningDate));
                 }
                 String screeningTime = rs.getString("screening_time");
-                if (screeningTime != null){
+                if (screeningTime != null) {
                     screening.setScreeningTime(LocalTime.parse(screeningTime));
                 }
                 screening.setMovie(movie);
@@ -138,5 +138,12 @@ public class AdminQuery {
             e.printStackTrace();
             return Collections.emptyList();
         }
+    }
+
+    public static Genre getGenreByName(Connection connection, String genreName) {
+        List<Genre> genres = getGenres(connection);
+        return genres.stream()
+                .filter(g -> g.getName().equals(genreName))
+                .findFirst().orElse(null);
     }
 }

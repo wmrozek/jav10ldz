@@ -13,9 +13,10 @@ public class CinemaMain {
         Connection conn = DatabaseConnection.getConnection();
 //            getMovies(conn);
 //            getMovieByTitle(titleToSearch, conn);
-        UseCases.showMovies(conn);
+//        UseCases.showMovies(conn);
 //        UseCases.showRepertoireByDate(conn, "2018-09-15");
-
+    UseCases.addMovie(conn, "Kler", "Wojciech Smarzowski", "Janusz Gajos, Arkadiusz Jakubik",
+        "Film o księżach", "2018-08-08", "01:40", "Dramat");
 //        UseCases.showRepertoireByDate(conn, "2018-09-20");
         DatabaseConnection.closeOnExit(conn);
     }

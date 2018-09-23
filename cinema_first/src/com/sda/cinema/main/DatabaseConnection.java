@@ -21,7 +21,7 @@ public class DatabaseConnection {
         try {
             conn =
                     DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?" +
-                            "user=root&password=mysql");
+                            "user=root&password=mysql&serverTimezone=UTC");
 
             // Do something with the Connection
             System.out.println(conn.getMetaData());

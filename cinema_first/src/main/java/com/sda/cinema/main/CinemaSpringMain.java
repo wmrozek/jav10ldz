@@ -18,7 +18,7 @@ import java.util.List;
 
 @SpringBootApplication
 @ComponentScan("com.sda")
-@EnableJpaRepositories(basePackages = "com.sda")
+@EnableJpaRepositories(basePackages = {"com.sda"})
 @EntityScan("com.sda")
 public class CinemaSpringMain implements CommandLineRunner {
 
@@ -47,17 +47,17 @@ public class CinemaSpringMain implements CommandLineRunner {
 //        }
 
 
-        Movie newMovie = new Movie();
-        newMovie.setTitle("Psy");
-        newMovie.setActors("Bogusław Linda");
-        newMovie.setDirector("Władysław Pasikowski");
-        newMovie.setDescription("Przygoda o psach");
-        newMovie.setDuration(LocalTime.of(1,50));
-        newMovie.setReleaseDate(LocalDate.of(1992, 2,3));
-        movieRepository.save(newMovie);
+//        Movie newMovie = new Movie();
+//        newMovie.setTitle("Psy");
+//        newMovie.setActors("Bogusław Linda");
+//        newMovie.setDirector("Władysław Pasikowski");
+//        newMovie.setDescription("Przygoda o psach");
+//        newMovie.setDuration(LocalTime.of(1,50));
+//        newMovie.setReleaseDate(LocalDate.of(1992, 2,3));
+//        movieRepository.save(newMovie);
 
 
-        Iterable<Movie> movies = movieRepository.findAll();
+        Iterable<Movie> movies = movieRepository.findByTitle("Obcy");
         for (Movie movie : movies) {
             System.out.println(movie.getTitle());
         }

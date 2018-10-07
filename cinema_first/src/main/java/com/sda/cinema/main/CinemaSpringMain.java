@@ -1,10 +1,12 @@
 package com.sda.cinema.main;
 
 import com.sda.cinema.administration.spring.SpringAdminQuery;
-import com.sda.cinema.model.ScreeningInfo;
 import com.sda.cinema.orm.model.Movie;
+import com.sda.cinema.orm.model.Screening;
 import com.sda.cinema.orm.repository.MovieRepository;
-import com.sda.cinema.ui.UserInterface;
+import com.sda.cinema.orm.repository.ScreeningRepository;
+import com.sda.cinema.ui.AddScreeningsUserInterface;
+import com.sda.cinema.ui.TicketBookingUserInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,8 +15,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 @SpringBootApplication
@@ -30,7 +30,13 @@ public class CinemaSpringMain implements CommandLineRunner {
     private MovieRepository movieRepository;
 
     @Autowired
-    private UserInterface userInterface;
+    private ScreeningRepository screeningRepository;
+
+    @Autowired
+    private TicketBookingUserInterface ticketBookingUserInterface;
+
+    @Autowired
+    private AddScreeningsUserInterface addScreeningsUserInterface;
 
     public static void main(String args[]) {
         SpringApplication.run(CinemaSpringMain.class, args);
@@ -66,7 +72,16 @@ public class CinemaSpringMain implements CommandLineRunner {
 //            System.out.println(movie.getTitle());
 //            System.out.println(movie.getGenre().getName());
 //        }
-        userInterface.ticketBooking();
+//        ticketBookingUserInterface.ticketBooking();
+        addScreeningsUserInterface.addScreenings();
+
+        Movie movie = new Movie();
+        movie.setId(16);
+        List<Screening> screeningList = screeningRepository.findByMovie(movie);
+        for (Screening screening : screeningList){
+            System.out.println(screening.getId() + " "+screening.getScreeningDate().toString());
+        }
+
     }
 
 }

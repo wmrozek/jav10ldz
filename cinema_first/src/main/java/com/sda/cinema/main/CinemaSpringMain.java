@@ -57,9 +57,10 @@ public class CinemaSpringMain implements CommandLineRunner {
 //        movieRepository.save(newMovie);
 
 
-        Iterable<Movie> movies = movieRepository.findByTitle("Obcy");
+        Iterable<Movie> movies = movieRepository.findAll();
         for (Movie movie : movies) {
             System.out.println(movie.getTitle());
+            System.out.println(movie.getGenre().getName());
         }
     }
 

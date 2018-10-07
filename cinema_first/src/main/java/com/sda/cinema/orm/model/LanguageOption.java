@@ -14,7 +14,7 @@ public class LanguageOption {
     @Column(name = "language_audio")
     private String audio;
     @Column(name = "subtitles")
-    private int subtitles;
+    private Integer subtitles;
 
     public int getId() {
         return id;
@@ -24,7 +24,7 @@ public class LanguageOption {
         return audio;
     }
 
-    public int getSubtitles() {
+    public Integer getSubtitles() {
         return subtitles;
     }
 
@@ -36,7 +36,7 @@ public class LanguageOption {
         this.audio = audio;
     }
 
-    public void setSubtitles(int subtitles) {
+    public void setSubtitles(Integer subtitles) {
         this.subtitles = subtitles;
     }
 }

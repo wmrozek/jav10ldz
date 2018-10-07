@@ -1,9 +1,6 @@
 package com.sda.cinema.orm.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -13,10 +10,12 @@ public class Ticket {
     private int id;
     @Column(name = "sale_date")
     private LocalDate saleDate;
-    @Column(name = "id_screening")
-    private int idScreening;
-    @Column(name = "id_ticket_type")
-    private int idTicketType;
+    @OneToOne
+    @JoinColumn(name = "id_screening")
+    private Screening screening;
+    @OneToOne
+    @JoinColumn(name = "id_ticket_type")
+    private TicketType ticketType;
 
     public int getId() {
         return id;
@@ -34,19 +33,19 @@ public class Ticket {
         this.saleDate = saleDate;
     }
 
-    public int getIdScreening() {
-        return idScreening;
+    public Screening getScreening() {
+        return screening;
     }
 
-    public void setIdScreening(int idScreening) {
-        this.idScreening = idScreening;
+    public void setScreening(Screening screening) {
+        this.screening = screening;
     }
 
-    public int getIdTicketType() {
-        return idTicketType;
+    public TicketType getTicketType() {
+        return ticketType;
     }
 
-    public void setIdTicketType(int idTicketType) {
-        this.idTicketType = idTicketType;
+    public void setTicketType(TicketType ticketType) {
+        this.ticketType = ticketType;
     }
 }

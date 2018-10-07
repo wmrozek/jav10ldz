@@ -1,9 +1,6 @@
 package com.sda.cinema.orm.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "cinema_rooms")
@@ -13,7 +10,18 @@ public class CinemaRoom {
     @Column(name = "room_name")
     private String roomName;
     @Column(name = "number_of_seats")
-    private int numberOfSeats;
+    private Integer numberOfSeats;
+    @OneToOne
+    @JoinColumn(name = "id_movie_technology")
+    private MovieTechnology movieTechnology;
+
+    public MovieTechnology getMovieTechnology() {
+        return movieTechnology;
+    }
+
+    public void setMovieTechnology(MovieTechnology movieTechnology) {
+        this.movieTechnology = movieTechnology;
+    }
 
     public int getId() {
         return id;
@@ -31,11 +39,11 @@ public class CinemaRoom {
         this.roomName = roomName;
     }
 
-    public int getNumberOfSeats() {
+    public Integer getNumberOfSeats() {
         return numberOfSeats;
     }
 
-    public void setNumberOfSeats(int numberOfSeats) {
+    public void setNumberOfSeats(Integer numberOfSeats) {
         this.numberOfSeats = numberOfSeats;
     }
 }

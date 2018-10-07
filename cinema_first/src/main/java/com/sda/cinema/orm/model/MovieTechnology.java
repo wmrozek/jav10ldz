@@ -11,7 +11,7 @@ public class MovieTechnology {
     @Id
     private int id;
     @Column(name = "technology_name")
-    private String technologhyName;
+    private String technologyName;
 
     public int getId() {
         return id;
@@ -21,11 +21,11 @@ public class MovieTechnology {
         this.id = id;
     }
 
-    public String getTechnologhyName() {
-        return technologhyName;
+    public String getTechnologyName() {
+        return technologyName;
     }
 
-    public void setTechnologhyName(String technologhyName) {
-        this.technologhyName = technologhyName;
+    public void setTechnologyName(String technologyName) {
+        this.technologyName = technologyName;
     }
 }

@@ -14,7 +14,7 @@ public class TicketType {
     @Column(name = "type_name")
     private String typeName;
     @Column(name = "percentage_discount")
-    private int percentageDiscount;
+    private Integer percentageDiscount;
 
     @Override
     public String toString() {
@@ -41,11 +41,11 @@ public class TicketType {
         this.typeName = typeName;
     }
 
-    public int getPercentageDiscount() {
+    public Integer getPercentageDiscount() {
         return percentageDiscount;
     }
 
-    public void setPercentageDiscount(int percentageDiscount) {
+    public void setPercentageDiscount(Integer percentageDiscount) {
         this.percentageDiscount = percentageDiscount;
     }
 }

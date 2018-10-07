@@ -13,7 +13,7 @@ public class AgeCategory {
     @Id
     private int id;
     @Column(name = "age_limit")
-    private int ageLimit;
+    private Integer ageLimit;
     @Column(name = "limit_description")
     private String limitDescription;
 
@@ -34,11 +34,11 @@ public class AgeCategory {
         this.id = id;
     }
 
-    public int getAgeLimit() {
+    public Integer getAgeLimit() {
         return ageLimit;
     }
 
-    public void setAgeLimit(int ageLimit) {
+    public void setAgeLimit(Integer ageLimit) {
         this.ageLimit = ageLimit;
     }
 

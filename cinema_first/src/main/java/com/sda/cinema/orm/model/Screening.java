@@ -1,8 +1,6 @@
 package com.sda.cinema.orm.model;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -12,22 +10,22 @@ public class Screening {
 
     @Id
     private int id;
-    @Column(name = "id_cinema_room")
-    private int idCinemaRoom;
-    @Column(name = "id_movie")
-    private int idMovie;
-    @Column(name = "id_movie_technology")
-    private int idMovieTechnology;
-    @Column(name = "id_language_option")
-    private int idLanguageOption;
+    @OneToOne
+    @JoinColumn(name = "id_cinema_room")
+    private CinemaRoom cinemaRoom;
+    @OneToOne
+    @JoinColumn(name = "id_movie")
+    private Movie movie;
+    @OneToOne
+    @JoinColumn(name = "id_language_option")
+    private LanguageOption languageOption;
     @Column(name = "price")
-    private int price;
+    private BigDecimal price;
     @Column(name = "screening_date")
     private LocalDate screeningDate;
     @Column(name = "screening_time")
     private LocalTime screeningTime;
 
-    //<editor-fold desc="Getters and Setters">
     public int getId() {
         return id;
     }
@@ -36,43 +34,35 @@ public class Screening {
         this.id = id;
     }
 
-    public int getIdMovie() {
-        return idMovie;
+    public CinemaRoom getCinemaRoom() {
+        return cinemaRoom;
     }
 
-    public void setIdMovie(int idMovie) {
-        this.idMovie = idMovie;
+    public void setCinemaRoom(CinemaRoom cinemaRoom) {
+        this.cinemaRoom = cinemaRoom;
     }
 
-    public int getIdCinemaRoom() {
-        return idCinemaRoom;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setIdCinemaRoom(int idCinemaRoom) {
-        this.idCinemaRoom = idCinemaRoom;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
-    public int getIdMovieTechnology() {
-        return idMovieTechnology;
+    public LanguageOption getLanguageOption() {
+        return languageOption;
     }
 
-    public void setIdMovieTechnology(int idMovieTechnology) {
-        this.idMovieTechnology = idMovieTechnology;
+    public void setLanguageOption(LanguageOption languageOption) {
+        this.languageOption = languageOption;
     }
 
-    public int getIdLanguageOption() {
-        return idLanguageOption;
-    }
-
-    public void setIdLanguageOption(int idLanguageOption) {
-        this.idLanguageOption = idLanguageOption;
-    }
-
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -89,8 +79,6 @@ public class Screening {
     }
 
     public void setScreeningTime(LocalTime screeningTime) {
-
         this.screeningTime = screeningTime;
     }
-    //</editor-fold>
 }

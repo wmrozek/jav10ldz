@@ -1,10 +1,7 @@
 package com.sda.cinema.orm.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -25,6 +22,12 @@ public class Movie {
     private String actors;
     @Column(name = "movie_description")
     private String description;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_genre")
+    private Genre genre;
+    @OneToOne
+    @JoinColumn(name = "id_age_category")
+    private AgeCategory ageCategory;
 
     public int getId() {
         return id;
@@ -80,5 +83,21 @@ public class Movie {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public AgeCategory getAgeCategory() {
+        return ageCategory;
+    }
+
+    public void setAgeCategory(AgeCategory ageCategory) {
+        this.ageCategory = ageCategory;
     }
 }

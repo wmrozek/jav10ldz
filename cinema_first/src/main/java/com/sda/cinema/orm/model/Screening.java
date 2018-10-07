@@ -81,4 +81,8 @@ public class Screening {
     public void setScreeningTime(LocalTime screeningTime) {
         this.screeningTime = screeningTime;
     }
+
+    public BigDecimal getPriceWithDiscount(int discount){
+        return price.subtract(price.multiply(new BigDecimal(discount)).divide(new BigDecimal(100)));
+    }
 }

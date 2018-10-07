@@ -2,6 +2,7 @@ package com.sda.cinema.orm.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tickets")
@@ -9,7 +10,7 @@ public class Ticket {
     @Id
     private int id;
     @Column(name = "sale_date")
-    private LocalDate saleDate;
+    private LocalDateTime saleDate;
     @OneToOne
     @JoinColumn(name = "id_screening")
     private Screening screening;
@@ -25,11 +26,11 @@ public class Ticket {
         this.id = id;
     }
 
-    public LocalDate getSaleDate() {
+    public LocalDateTime getSaleDate() {
         return saleDate;
     }
 
-    public void setSaleDate(LocalDate saleDate) {
+    public void setSaleDate(LocalDateTime saleDate) {
         this.saleDate = saleDate;
     }
 

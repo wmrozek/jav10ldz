@@ -4,6 +4,7 @@ import com.sda.cinema.administration.spring.SpringAdminQuery;
 import com.sda.cinema.model.ScreeningInfo;
 import com.sda.cinema.orm.model.Movie;
 import com.sda.cinema.orm.repository.MovieRepository;
+import com.sda.cinema.ui.UserInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,6 +28,9 @@ public class CinemaSpringMain implements CommandLineRunner {
 
     @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired
+    private UserInterface userInterface;
 
     public static void main(String args[]) {
         SpringApplication.run(CinemaSpringMain.class, args);
@@ -57,11 +61,12 @@ public class CinemaSpringMain implements CommandLineRunner {
 //        movieRepository.save(newMovie);
 
 
-        Iterable<Movie> movies = movieRepository.findAll();
-        for (Movie movie : movies) {
-            System.out.println(movie.getTitle());
-            System.out.println(movie.getGenre().getName());
-        }
+//        Iterable<Movie> movies = movieRepository.findAll();
+//        for (Movie movie : movies) {
+//            System.out.println(movie.getTitle());
+//            System.out.println(movie.getGenre().getName());
+//        }
+        userInterface.ticketBooking();
     }
 
 }

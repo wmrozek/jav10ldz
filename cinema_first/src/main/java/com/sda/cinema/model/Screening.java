@@ -1,5 +1,6 @@
 package com.sda.cinema.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -40,4 +41,5 @@ public class Screening {
     public void setScreeningTime(LocalTime screeningTime) {
         this.screeningTime = screeningTime;
     }
+
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,15 +42,43 @@ public class UserInterface {
         Screening screening = getScreening(movie);
         System.out.println("Wybierz typ biletu");
         TicketType ticketType = getTicketType();
-        Ticket ticket = addTicket(screening, ticketType);
-        System.out.println(String.format("Kupiłeś bilet na seans: %s, %s %s. Cena biletu: %s",
+        System.out.println("Podaj ilość biletów");
+        int ticketCount = getInt();
+        ticketCount = checkAvailableTickets(screening,ticketCount);
+        List<Ticket> tickets = addTickets(screening, ticketType, ticketCount);
+        System.out.println(String.format("Kupiłeś %d biletów na seans: %s, %s %s. Cena biletu: %s",
+                ticketCount,
                 movie.getTitle(),
                 screening.getScreeningDate().toString(),
                 screening.getScreeningTime().toString(),
                 screening.getPriceWithDiscount(ticketType.getPercentageDiscount())));
+
     }
 
-    private Ticket addTicket(Screening screening, TicketType ticketType){
+    private int checkAvailableTickets(Screening screening, int ticketCount){
+        int numberOfSeats = screening.getCinemaRoom().getNumberOfSeats();
+        int soldTickets = ticketRepository.getTicketCountByScreening(screening);
+        int freeSeats = numberOfSeats - soldTickets;
+        if (freeSeats>=ticketCount){
+            return ticketCount;
+        }
+        else if (freeSeats==0){
+            System.out.println("Brak wolnych miejsc!");
+            throw new IllegalStateException();
+        }
+        else {
+            System.out.println("Dostępne tylko "+ freeSeats + " wolnych miejsc. Czy chcesz dokonać zakupu?(T/N)");
+            String choice = scanner.nextLine();
+            if (choice.equalsIgnoreCase("T")){
+                return freeSeats;
+            }
+            else {
+                throw new IllegalStateException();
+            }
+        }
+    }
+
+    private Ticket addTicket(Screening screening, TicketType ticketType) {
         Ticket ticket = new Ticket();
         ticket.setSaleDate(LocalDateTime.now());
         ticket.setScreening(screening);
@@ -58,10 +87,19 @@ public class UserInterface {
         return ticket;
     }
 
+    private List<Ticket> addTickets(Screening screening, TicketType ticketType, int ticketCount) {
+        List<Ticket> tickets = new ArrayList<>();
+        for (int i = 0; i < ticketCount; i++) {
+            tickets.add(addTicket(screening, ticketType));
+        }
+        return tickets;
+    }
+
+
     private TicketType getTicketType() {
         List<TicketType> ticketTypes = ticketTypeRepository.findAll();
         for (TicketType ticketType : ticketTypes) {
-            System.out.println(ticketType.getId() + " " +ticketType.getTypeName());
+            System.out.println(ticketType.getId() + " " + ticketType.getTypeName());
         }
         System.out.println("Podaj id biletu");
         Integer idTicket = getInt();
